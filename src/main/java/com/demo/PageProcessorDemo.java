@@ -14,14 +14,14 @@ import us.codecraft.webmagic.processor.PageProcessor;
  */
 public class PageProcessorDemo implements PageProcessor {
 	// 抓取网站相关配置，包括编码，抓取间隔，重试次数等。
-	private Site site = Site.me().setRetryTimes(3).setSleepTime(1000);
+	private Site site = Site.me().setSleepTime(1);
 
 	@Override
 	public Site getSite() {
 		
 		return site;
 	}
-
+	 int temp=1;  
 	@Override
 	public void process(Page page) {
 		//定义如何抽取页面信息，并保存下来
@@ -34,9 +34,11 @@ public class PageProcessorDemo implements PageProcessor {
 		//设置skip之后，这个页面的结果不会被pipeline处理
 		page.setSkip(true);
 	}
-	
+	 
 	//从页面发现后续的url地址来获取
 	page.addTargetRequests(page.getHtml().links().regex("(http://news.baidu.com\\w+/\\w+)").all());
+	
+	System.out.println("记录数:"+temp++);
 	}
 	
 	public static void main(String[] args){
